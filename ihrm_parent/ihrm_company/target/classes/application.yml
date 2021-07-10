@@ -1,0 +1,17 @@
+
+server:
+  port: 9001
+
+spring:
+  application:
+    name: blog.sakuramk.cn
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://127.0.0.1:3306/ihrm?serverTimezone=PRC&characterEncoding=utf-8&useSSL=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+
+  jpa:
+    database: MySQL
+    show-sql: true
+    open-in-view: true
