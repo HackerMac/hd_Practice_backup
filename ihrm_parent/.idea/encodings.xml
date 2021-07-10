@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ihrm_attendance/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_audit/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ihrm_common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ihrm_common_model/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ihrm_company/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_employee/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_gate/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_salarys/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_social_securitys/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ihrm_system/src/main/java" charset="UTF-8" />
   </component>
 </project>

@@ -1,0 +1,40 @@
+#微服务注册到eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    preferIpAddress : true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+#服务配置
+server:
+  port: 9002
+#spring配置
+spring:
+  #1.应用配置
+  application:
+    name: ihrm-system #指定服务名
+  #2.数据库连接池
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ihrm?serverTimezone=PRC&characterEncoding=utf-8&useSSL=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 2
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  #3.JPA
+  jpa:
+    database: MySQL
+    show-sql: true
+    open-in-view: true
+my:
+  appId: 24530283
+  apiKey: rplPhR9MstIpAIGfLw9v7pWo
+  secretKey: liTBGrnvvwd9ln3C6QCIVTnGKrkS1dl4
+  imageType: BASE64
+  groupId: uestc_hd
+#  url: http://localhost:8080/#/facelogin
+  url: http://localhost:8080/#/facelogin
