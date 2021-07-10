@@ -1,12 +1,9 @@
 package com.ihrm.domain.company;
-
 /**
- * @Classname Department
  * @Description TODO
- * @Date 2021/7/9 20:43
+ * @Date 2021/7/9
  * @Created by MINGKU
  */
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,14 +43,16 @@ public class Department implements Serializable {
      * 部门编码，同级部门不可重复
      */
     private String code;
+
     /**
      * 负责人ID
      */
     private String managerId;
     /**
-     * 负责人名称
-     */
+	*  负责人名称
+	*/
     private String manager;
+
     /**
      * 介绍
      */

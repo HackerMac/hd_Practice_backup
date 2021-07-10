@@ -1,9 +1,14 @@
-package com.ihrm.common.Utils;
-
+package com.ihrm.common.utils;
+/**
+ * @Description TODO
+ * @Date 2021/7/8
+ * @Created by MINGKU
+ */
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 
+//雪花算法代码实现
 public class IdWorker {
     // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
     private final static long twepoch = 1288834974657L;
@@ -22,25 +27,27 @@ public class IdWorker {
     // 数据中心ID左移17位
     private final static long datacenterIdShift = sequenceBits + workerIdBits;
     // 时间毫秒左移22位
-    private final static long timestampLeftShift = sequenceBits + workerIdBits +
-            datacenterIdBits;
+    private final static long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+
     private final static long sequenceMask = -1L ^ (-1L << sequenceBits);
     /* 上次生产id时间戳 */
     private static long lastTimestamp = -1L;
     // 0，并发控制
     private long sequence = 0L;
+
     private final long workerId;
     // 数据标识id部分
     private final long datacenterId;
+
     public IdWorker(){
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
     /**
      * @param workerId
-     * 工作机器ID
+     *            工作机器ID
      * @param datacenterId
-     * 序列号
+     *            序列号
      */
     public IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
@@ -60,13 +67,14 @@ public class IdWorker {
     public synchronized long nextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
-            throw new RuntimeException(String.format("Clock moved backwards. Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
+            throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
         }
+
         if (lastTimestamp == timestamp) {
-// 当前毫秒内，则+1
+            // 当前毫秒内，则+1
             sequence = (sequence + 1) & sequenceMask;
             if (sequence == 0) {
-            // 当前毫秒内计数满了，则等待下一秒
+                // 当前毫秒内计数满了，则等待下一秒
                 timestamp = tilNextMillis(lastTimestamp);
             }
         } else {
@@ -77,8 +85,10 @@ public class IdWorker {
         long nextId = ((timestamp - twepoch) << timestampLeftShift)
                 | (datacenterId << datacenterIdShift)
                 | (workerId << workerIdShift) | sequence;
+
         return nextId;
     }
+
     private long tilNextMillis(final long lastTimestamp) {
         long timestamp = this.timeGen();
         while (timestamp <= lastTimestamp) {
@@ -86,9 +96,11 @@ public class IdWorker {
         }
         return timestamp;
     }
+
     private long timeGen() {
         return System.currentTimeMillis();
     }
+
     /**
      * <p>
      * 获取 maxWorkerId
@@ -109,6 +121,7 @@ public class IdWorker {
          */
         return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
     }
+
     /**
      * <p>
      * 数据标识id部分
@@ -128,7 +141,7 @@ public class IdWorker {
                 id = id % (maxDatacenterId + 1);
             }
         } catch (Exception e) {
-            System.out.println(" getDatacenterId: " + e.getMessage());
+            e.printStackTrace();
         }
         return id;
     }
